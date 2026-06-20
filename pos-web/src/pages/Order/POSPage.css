@@ -1,0 +1,135 @@
+.pos-full-wrapper {
+    height: 100vh;
+    background: #eef0f3;
+}
+
+/* Navbar chứa Search giống ImportStock */
+.pos-navbar {
+    background: #fff !important;
+    padding: 0 15px !important;
+    height: 60px !important;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #d9d9d9;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.pos-main-content {
+    padding: 10px;
+    height: calc(100vh - 60px);
+}
+
+/* Cột trái */
+.pos-left-section {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.table-container {
+    background: #fff;
+    flex: 1;
+    border-radius: 4px 4px 0 0;
+    overflow: hidden;
+}
+
+.note-footer {
+    background: #fff;
+    padding: 8px 15px;
+    border-top: 1px solid #f0f0f0;
+    border-radius: 0 0 4px 4px;
+}
+
+/* Cột phải */
+.payment-sidebar {
+    background: #fff;
+    height: 100%;
+    border-radius: 4px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.customer-info-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.billing-details {
+    margin-top: 30px;
+    flex: 1;
+}
+
+.bill-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 15px;
+}
+
+.bill-row .val {
+    font-weight: 600;
+}
+
+.bill-row.total {
+    margin-top: 20px;
+}
+
+/* Kết quả search product */
+.search-result-item {
+    display: flex;
+    align-items: center;
+    padding: 4px 0;
+}
+
+.search-result-item .item-img {
+    width: 40px;
+    height: 40px;
+    background: #f5f5f5;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+    overflow: hidden;
+}
+
+.search-result-item .item-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.search-result-item .item-info {
+    flex: 1;
+}
+
+.item-line-1, .item-line-2 {
+    display: flex;
+    justify-content: space-between;
+}
+
+.text-blue {
+    color: #133470;
+}
+
+/* Nút thanh toán lớn */
+.btn-pay-giant {
+    height: 80px !important;
+    background: #133470 !important;
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    font-size: 20px !important;
+    font-weight: bold !important;
+    border-radius: 8px !important;
+}
+
+.payment-footer {
+    margin-top: auto;
+}

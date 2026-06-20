@@ -1,0 +1,98 @@
+/* Reset căn bản */
+body, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+/* Header Fix - Ép chiều cao cố định để không bị vỡ */
+.modern-header {
+  background: #0f172a !important; 
+  height: 56px !important;
+  padding: 0 20px !important;
+  display: flex !important;
+  align-items: center !important; /* Căn giữa theo chiều dọc */
+  justify-content: space-between !important;
+  line-height: normal !important; /* Xóa line-height thừa của Antd */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.header-left {
+  display: flex !important;
+  align-items: center !important;
+  flex: 1;
+  height: 100%;
+}
+
+/* Menu Custom - Đảm bảo menu nằm ngang hàng với logo */
+.modern-menu {
+  background: transparent !important;
+  border-bottom: none !important;
+  line-height: 56px !important; /* Chỉ áp dụng cho item bên trong */
+  flex: 1;
+  margin-left: 20px;
+}
+
+.modern-menu .ant-menu-item {
+  margin: 0 4px !important;
+  border-radius: 4px;
+}
+
+/* Right Side Action */
+.header-right {
+  display: flex !important;
+  align-items: center !important;
+  gap: 16px;
+}
+
+.btn-sale {
+  background: #10b981 !important;
+  border: none !important;
+  font-weight: 600 !important;
+  height: 36px !important;
+  border-radius: 6px !important;
+}
+
+/* Fix lỗi nội dung trang bị đè */
+.main-content {
+  background: #f8fafc;
+  padding: 24px;
+  min-height: calc(100vh - 56px - 70px); /* Trừ Header và Footer */
+}
+
+.page-wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.import-card {
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  min-height: 500px;
+}
+
+.import-info-card {
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  position: sticky;
+  top: 76px;
+}
+
+.ant-table-summary {
+  background: #fafafa;
+  font-weight: bold;
+}
+.expanded-row-custom {
+    background: #ffffff;
+}
+.ant-table-expanded-row > .ant-table-cell {
+    background: #fdfdfd !important;
+    padding: 16px 24px !important;
+}

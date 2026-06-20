@@ -1,0 +1,147 @@
+.import-wrapper {
+  background: #e6e9ed;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.import-header-sticky {
+  background: #fff;
+  padding: 0 20px;
+  height: 50px;
+  border-bottom: 1px solid #d9d9d9;
+  flex-shrink: 0;
+}
+
+.import-body {
+  flex: 1;
+  padding: 10px;
+  overflow: hidden; /* Quan trọng để không bị vỡ layout tổng */
+}
+
+.table-col {
+  background: #fff;
+  border-radius: 4px;
+  height: 100%;
+  overflow: auto;
+  border-right: 10px solid #e6e9ed; /* Tạo khoảng cách giả với sidebar */
+}
+
+.sidebar-col {
+  height: 100%;
+}
+
+.sidebar-content {
+  background: #fff;
+  height: 100%;
+  border-radius: 4px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.m-t-10 { margin-top: 10px; }
+.m-t-15 { margin-top: 15px; }
+.m-t-20 { margin-top: 20px; }
+.text-blue { color: #1890ff; font-weight: 500; }
+
+.action-footer {
+  margin-top: auto; /* Đẩy cụm nút xuống đáy sidebar */
+  display: flex;
+  gap: 10px;
+}
+
+.btn-draft {
+  flex: 1;
+  background: #526484 !important;
+  color: white !important;
+  border: none;
+}
+
+.btn-complete {
+  flex: 1;
+  background: #28a745 !important;
+  border-color: #28a745 !important;
+}
+
+.back-icon {
+  font-size: 18px;
+  cursor: pointer;
+  color: #8c8c8c;
+}
+
+/* Fix lỗi InputNumber bị lệch trong Ant Design */
+.ant-input-number-group-wrapper {
+  display: inline-block;
+}
+/* Container chính của 1 hàng kết quả */
+.search-item-container {
+  display: flex;
+  align-items: center;
+  padding: 5px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+/* Khối ảnh bên trái */
+.search-item-image {
+  width: 50px;
+  height: 50px;
+  margin-right: 12px;
+  flex-shrink: 0;
+  border-radius: 4px;
+  overflow: hidden;
+  background: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-item-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Khối thông tin bên phải */
+.search-item-info {
+  flex: 1;
+  line-height: 1.4;
+}
+
+.item-name {
+  font-size: 14px;
+  color: #1890ff; /* Màu xanh giống KiotViet cho tên SP */
+}
+
+.item-unit {
+  color: #8c8c8c;
+  font-size: 12px;
+}
+
+.item-details {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+}
+
+.item-price {
+  color: #262626;
+  font-weight: 500;
+}
+
+.item-stock {
+  font-size: 12px;
+  color: #595959;
+}
+
+/* Tùy chỉnh chiều rộng dropdown của AutoComplete */
+.ant-select-dropdown {
+  min-width: 450px !important; /* Đảm bảo đủ rộng để hiện thông tin */
+}

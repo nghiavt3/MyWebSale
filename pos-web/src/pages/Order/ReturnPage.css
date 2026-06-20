@@ -1,0 +1,136 @@
+/* Layout Tổng thể */
+.pos-return-layout {
+    height: 100vh;
+    background-color: #f0f2f5;
+    padding: 8px;
+}
+
+.pos-return-main {
+    display: flex;
+    flex-direction: column;
+    margin-right: 8px;
+}
+
+/* Header tìm kiếm trắng */
+.pos-header-container {
+    background: #fff;
+    padding: 10px 16px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.pos-search-input {
+    border: none !important;
+    background: transparent !important;
+}
+
+.pos-search-input:focus {
+    box-shadow: none !important;
+}
+
+/* Bảng dữ liệu */
+.pos-table-container {
+    flex: 1;
+    background: #fff;
+    border-radius: 4px;
+    overflow: auto;
+}
+
+.pos-bottom-zone {
+    background: #fff;
+    margin-top: 8px;
+    padding: 8px;
+    border-radius: 4px;
+}
+
+/* Sidebar POS Style */
+.pos-return-sidebar {
+    background: #fff !important;
+    border-radius: 4px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-user-section {
+    margin-bottom: 24px;
+}
+
+.user-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.pos-cust-input {
+    border-radius: 4px;
+}
+
+/* Billing Section */
+.pos-billing-section {
+    flex: 1;
+}
+
+.billing-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.total-row {
+    margin: 30px 0;
+    border-top: 1px dashed #d9d9d9;
+    padding-top: 20px;
+}
+
+.pos-billing-input {
+    width: 120px;
+    text-align: right;
+}
+
+.pos-billing-input.big {
+    width: 180px;
+    font-size: 18px;
+}
+
+.pos-unit-tag {
+    background: #f5f5f5;
+    padding: 4px 10px;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+}
+
+/* Nút Thanh toán giống POS */
+.pos-action-container {
+    margin-top: auto;
+}
+
+.pos-btn-pay {
+    height: 60px;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #133470 !important;
+    border: none;
+    border-radius: 4px;
+}
+
+/* Kết quả tìm kiếm */
+.pos-search-item {
+    padding: 8px 4px;
+    border-bottom: 1px solid #f0f0f0;
+}
+.payment-method-toggle {
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Hiệu ứng khi nút được chọn */
+.payment-method-toggle .ant-btn-primary {
+    background-color: #1890ff;
+    border-color: #1890ff;
+    color: white;
+}
