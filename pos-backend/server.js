@@ -17,7 +17,14 @@ const multer = require('multer');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'pos-backend/uploads/purchase_orders/'); // Đảm bảo thư mục này đã tồn tại
+        // Sử dụng path.join để xây dựng đường dẫn tuyệt đối
+        // Giả sử file code này nằm trong thư mục gốc của dự án
+        const uploadPath = path.join(__dirname, 'uploads', 'purchase_orders');
+        
+        // Kiểm tra và tự động tạo thư mục nếu chưa có
+        fs.mkdir(uploadPath, { recursive: true })
+            .then(() => cb(null, uploadPath))
+            .catch(err => cb(err));
     },
     filename: function (req, file, cb) {
         // Lấy phần mở rộng gốc (vd: .png) từ file.originalname
@@ -29,7 +36,11 @@ const storage = multer.diskStorage({
 
 const storageProduct = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'pos-backend/uploads/products/'); // Đảm bảo thư mục này đã tồn tại
+        const uploadPath = path.join(__dirname, 'uploads', 'products');
+        
+        fs.mkdir(uploadPath, { recursive: true })
+            .then(() => cb(null, uploadPath))
+            .catch(err => cb(err));
     },
     filename: function (req, file, cb) {
         // Lấy phần mở rộng gốc (vd: .png) từ file.originalname
