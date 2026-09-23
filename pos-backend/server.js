@@ -408,9 +408,11 @@ app.post('/api/products', uploadProduct.any(), async (req, res) => {
 
             // Tìm file ảnh tương ứng với đơn vị này (nếu có)
             // Giả sử bạn gửi kèm key 'image_i' trong FormData
-            const file = files.find(f => f.fieldname === `image_${unit.sku}`);
+            const fieldName = `image_${unit.sku || `unit_${i}`}`;
+            const file = files.find(f => f.fieldname === fieldName);
+            let imageUrl = unit.image_url || ''; // Giữ lại ảnh cũ nếu đang ở chế độ sửa và không đổi ảnh mới
             if (file) {
-                const imageUrl = `/uploads/products/${file.filename}`;
+                imageUrl = `/uploads/products/${file.filename}`;
                 // Thực hiện Update/Insert với imageUrl này
                 // Đừng quên: Nếu là PUT, nhớ xóa file cũ tại đây như tôi đã hướng dẫn trước đó!
                 await connection.execute(
@@ -1145,9 +1147,9 @@ app.get('/api/invoices/:id/details', async (req, res) => {
             product_name: item.master_name, // Để hiển thị tên sản phẩm trên dòng hàng
             quantity: Number(item.quantity),
             sale_price: Number(item.sale_price),
-            lineDiscountValue: Number(item.line_discount_value || 0),
-            lineDiscountType: item.line_discount_type || 'VND',
-            total: Number(item.line_total)
+            line_discount_value: Number(item.line_discount_value || 0),
+            line_discount_type: item.line_discount_type || 'VND',
+            line_total: Number(item.line_total)
         }));
 
         res.json(formattedDetails);
@@ -1282,8 +1284,8 @@ app.get('/api/purchase-orders/:id/details', async (req, res) => {
                 u.sku as product_sku,
                 d.quantity,
                 d.import_price as cost_price,
-                d.line_discount_value as lineDiscountValue,
-                d.line_discount_type as lineDiscountType,
+                d.line_discount_value as line_discount_value,
+                d.line_discount_type as line_discount_type,
                 d.line_total as total,
                 p.master_name as name,
                 u.unit_name as unit_name
@@ -1305,7 +1307,7 @@ app.get('/api/purchase-orders/:id/details', async (req, res) => {
             ...item,
             quantity: Number(item.quantity) || 0,
             cost_price: Number(item.cost_price) || 0,
-            lineDiscountValue: Number(item.lineDiscountValue) || 0,
+            line_discount_value: Number(item.line_discount_value) || 0,
             total: Number(item.total) || 0
         }));
 
@@ -1338,6 +1340,8 @@ app.get('/api/purchase-orders', async (req, res) => {
                 pd.product_sku, 
                 pd.quantity, 
                 pd.import_price as cost_price, 
+                pd.line_discount_value,
+                pd.line_discount_type,
                 pd.line_total as total,
                 p.master_name as name,
                 u.unit_name,
@@ -1356,7 +1360,7 @@ app.get('/api/purchase-orders', async (req, res) => {
             const {
                 id, supplier_id, po_code, created_at, status, total_amount, discount_type,
                 discount_value, final_amount, note, supplier_name,
-                detail_id, product_sku, quantity, cost_price, total, name, unit_name,
+                detail_id, product_sku, quantity, cost_price, total, name, unit_name, line_discount_value, line_discount_type,  
                 image_url
             } = row;
 
@@ -1383,7 +1387,9 @@ app.get('/api/purchase-orders', async (req, res) => {
                     unit_name,
                     quantity: Number(quantity) || 0,
                     cost_price: Number(cost_price) || 0,
-                    total: Number(total) || 0
+                    total: Number(total) || 0,
+                    line_discount_value: parseFloat(line_discount_value) || 0,
+                    line_discount_type: line_discount_type
                 });
             }
 
