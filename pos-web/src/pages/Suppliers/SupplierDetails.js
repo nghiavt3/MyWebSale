@@ -121,7 +121,8 @@ const SupplierDetails = ({ supplier, onUpdate }) => {
                 details: res.data.details, // Lấy mảng hàng hóa
                 images: res.data.images    // Lấy mảng url ảnh
             });
-            console.log(selectedOrder)
+            console.log('Chi tiết đơn hàng:', res.data);
+            console.log('Selected Order state:', selectedOrder);
         } catch (err) {
             message.error("Không thể tải chi tiết hóa đơn");
             setSelectedOrder(order);

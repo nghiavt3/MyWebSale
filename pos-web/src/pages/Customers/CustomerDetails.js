@@ -36,6 +36,7 @@ const CustomerDetails = ({ customer, onUpdate }) => {
         try {
             const res = await axiosClient.get(`/api/customers/${customer.id}/sale-history`);
             setHistory(res.data);
+            console.log('Sale history:', res.data);
         } catch (err) {
             message.error("Lỗi tải lịch sử bán hàng");
         } finally {

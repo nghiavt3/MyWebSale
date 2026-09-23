@@ -157,20 +157,18 @@ const ReturnPage = () => {
             dataIndex: 'quantity',
             width: 120,
             render: (val, record) => (
-                <InputNumber min={1} value={val} variant="borderless" onChange={v => setSelectedItems(selectedItems.map(i => i.sku === record.sku ? { ...i, quantity: v } : i))} />
+                <InputNumber min={0} value={val} variant="borderless" onChange={v => setSelectedItems(selectedItems.map(i => i.sku === record.sku ? { ...i, quantity: v } : i))} />
             )
         },
         {
             title: 'Giá bán',
             dataIndex: 'return_price',
             width: 120,
-            render: (val) => val.toLocaleString()
+            render: (val, record) => (
+                <InputNumber min={0} value={val} variant="borderless" onChange={v => setSelectedItems(selectedItems.map(i => i.sku === record.sku ? { ...i, return_price: v } : i))} />
+            )
         },
-        {
-            title: 'Chiết khấu',
-            width: 120,
-            render: () => <InputNumber defaultValue={0} variant="borderless" />
-        },
+        
         {
             title: 'Thành tiền',
             align: 'right',

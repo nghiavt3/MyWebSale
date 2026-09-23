@@ -6,13 +6,37 @@ const { Text, Title } = Typography;
 
 const InvoiceDetailView = ({ record }) => {
     if (!record) return null;
-
+    console.log('InvoiceDetailView record:', record);
     const columns = [
         { title: 'Mã hàng', dataIndex: 'product_sku', key: 'sku' },
         { title: 'Tên hàng', dataIndex: 'product_name', key: 'name' },
         { title: 'SL', dataIndex: 'quantity', align: 'right' },
         { title: 'Giá bán', dataIndex: 'sale_price', align: 'right', render: v => v?.toLocaleString() },
-        { title: 'Giảm giá', dataIndex: 'line_discount_value', align: 'right', render: v => v?.toLocaleString() },
+        {
+            title: 'Loại CK',
+            dataIndex: 'line_discount_type',
+            key: 'disc_type',
+            align: 'right',
+            render: (v) => v || '---'
+        },
+        {
+            title: 'Giảm giá',
+            dataIndex: 'line_discount_value',
+            key: 'disc_value',
+            align: 'right',
+            render: (v) => Number(v || 0).toLocaleString()
+        },
+        {
+            title: 'Giá sau CK',
+            key: 'price_after_discount',
+            align: 'right',
+            render: (_, record) => {
+                const quantity = Number(record.quantity) || 1;
+                const total = Number(record.line_total) || 0;
+                const priceAfterDisc = quantity > 0 ? total / quantity : 0;
+                return <Text>{Math.round(priceAfterDisc).toLocaleString()}</Text>;
+            }
+        },
         { 
             title: 'Thành tiền', 
             dataIndex: 'line_total', 

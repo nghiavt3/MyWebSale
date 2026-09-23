@@ -7,6 +7,7 @@ const { Text, Title } = Typography;
 
 const PurchaseOrderDetailView = ({ record, onEditDraft, hideActions = false }) => {
     if (!record) return null;
+    console.log('PurchaseOrderDetailView record:', record);
     const detailColumns = [
         {
             title: 'Mã hàng',
@@ -30,17 +31,28 @@ const PurchaseOrderDetailView = ({ record, onEditDraft, hideActions = false }) =
         },
         {
             title: 'Loại CK',
-            dataIndex: 'lineDiscountType',
-            key: 'disc',
+            dataIndex: 'line_discount_type',
+            key: 'disc_type',
             align: 'right',
-            render: (v) => v?.toLocaleString()
+            render: (v) => v || '---'
         },
         {
             title: 'Giảm giá',
-            dataIndex: 'lineDiscountValue',
-            key: 'disc',
+            dataIndex: 'line_discount_value',
+            key: 'disc_value',
             align: 'right',
-            render: (v) => v?.toLocaleString()
+            render: (v) => Number(v || 0).toLocaleString()
+        },
+        {
+            title: 'Giá sau CK',
+            key: 'price_after_discount',
+            align: 'right',
+            render: (_, record) => {
+                const quantity = Number(record.quantity) || 1;
+                const total = Number(record.total) || 0;
+                const priceAfterDisc = quantity > 0 ? total / quantity : 0;
+                return <Text>{Math.round(priceAfterDisc).toLocaleString()}</Text>;
+            }
         },
         {
             title: 'Thành tiền',

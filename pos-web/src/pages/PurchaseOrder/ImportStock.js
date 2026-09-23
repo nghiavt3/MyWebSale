@@ -8,7 +8,7 @@ import dayjs from 'dayjs';
 import {
     ArrowLeftOutlined, SearchOutlined, DeleteOutlined,
     SaveOutlined, CheckCircleFilled, PrinterOutlined,
-    EyeOutlined, MoreOutlined, PhoneOutlined, EnvironmentOutlined, PlusOutlined, UploadOutlined
+    EyeOutlined, MoreOutlined, PhoneOutlined, EnvironmentOutlined, PlusOutlined, UploadOutlined,EditOutlined
 } from '@ant-design/icons';
 import axiosClient from '../../api/axiosClient';
 import axiosUpload from '../../api/axiosUpload';
@@ -367,7 +367,16 @@ const ImportStock = ({ initialData, onBack }) => {
                 supplierData: s
             }));
     }, [searchSupplierText, allSuppliers]);
-
+    const handleUpdateProductPrice = async (record) => {
+            try {
+                await axiosClient.put(`/api/products/update-price/${record.sku}`, {
+                    sale_price: record.sale_price
+                });
+                message.success(`Đã cập nhật giá bán cho ${record.master_name}`);
+            } catch (err) {
+                message.error("Lỗi khi cập nhật giá");
+            }
+        };
     const columns = [
         { title: 'STT', render: (t, r, i) => i + 1, width: 50, align: 'center' },
         { title: 'Mã hàng', dataIndex: 'sku', width: 120, className: 'text-blue' },
@@ -447,6 +456,50 @@ const ImportStock = ({ initialData, onBack }) => {
                         </Select>
                     }
                 />
+            )
+        },
+        {
+            title: 'Giá sau CK',
+            width: 120,
+            align: 'right',
+            render: (_, record) => {
+                const qty = Number(record.quantity) || 1;
+                const tot = Number(record.total) || 0;
+                const priceAfterDisc = qty > 0 ? tot / qty : 0;
+                return <b>{Math.round(priceAfterDisc).toLocaleString('vi-VN')}</b>;
+            }
+        },
+        {
+            title: 'Giá bán',
+            dataIndex: 'sale_price', // Đổi tên field tùy theo database của bạn (ví dụ: retail_price, selling_price...)
+            width: 150,
+            render: (val, record) => (
+                <Space.Compact style={{ width: '100%' }}>
+                    <InputNumber
+                        value={val}
+                        min={0}
+                        placeholder="Giá bán"
+                        formatter={value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                        parser={value => value.replace(/\$\s?|(,*)/g, '')}
+                        style={{ width: '100%' }}
+                        onChange={(newPrice) => {
+                            const prc = newPrice || 0;
+                            setSelectedItems(selectedItems.map(i =>
+                                i.sku === record.sku ? { ...i, sale_price: prc } : i
+                            ));
+                        }}
+                    />
+                    <Button 
+                        type="text" 
+                        icon={<EditOutlined style={{ color: '#1890ff' }} />}
+                        size="small"
+                        title="Cập nhật giá bán"
+                        onClick={() => {
+                            // Gọi hàm cập nhật giá bán lên API hoặc xử lý riêng cho sản phẩm này
+                            handleUpdateProductPrice(record); 
+                        }}
+                    />
+                </Space.Compact>
             )
         },
         { title: 'Thành tiền', dataIndex: 'total', width: 130, align: 'right', render: (v) => <b>{Math.round(v || 0).toLocaleString('vi-VN')}</b> },
